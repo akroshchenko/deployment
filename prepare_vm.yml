@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  sudo: yes
   tasks:
   - name: Add os repo
     yum_repository:
@@ -41,7 +42,7 @@
     yum_repository:
       name: repo1
       description: os repo
-      baseurl: {{lataest_snaphot}}
+      baseurl: {{ lataest_snaphot }}
       enabled: yes
 
   - name: Install list of packages
