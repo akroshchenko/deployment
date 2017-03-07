@@ -1,0 +1,52 @@
+---
+- hosts: all
+  tasks:
+  - name: Add os repo
+    yum_repository:
+      name: os
+      description: os repo
+      baseurl: http://mirror.fuel-infra.org/pkgs/centos-latest/os/x86_64/
+      enabled: yes
+
+  - name: Add updates repo
+    yum_repository:
+      name: updates
+      description: os repo
+      baseurl: http://mirror.fuel-infra.org/pkgs/centos-latest/updates/x86_64/
+      enabled: yes
+
+  - name: Add extras repo
+    yum_repository:
+      name: extras
+      description: os repo
+      baseurl: http://mirror.fuel-infra.org/pkgs/centos-latest/extras/x86_64/
+      enabled: yes
+
+  - name: Add CR-repo
+    yum_repository:
+      name: CR-repo
+      description: os repo
+      baseurl: http://perestroika-repo-tst.infra.mirantis.net/review/{{CR}}/mos-repos/centos/mos-master-centos7/os/x86_64
+      enabled: yes
+
+
+  - name: Add deps repo
+    yum_repository:
+      name: deps
+      description: os repo
+      baseurl: http://perestroika-repo-tst.infra.mirantis.net/mos-repos/centos/mos-master-centos7/os/x86_64
+      enabled: yes
+
+  - name: Add repo1 repo
+    yum_repository:
+      name: repo1
+      description: os repo
+      baseurl: {{lataest_snaphot}}
+      enabled: yes
+
+  - name: Install list of packages
+    apt: name={{item}} state=installed
+# Add list of packages
+    with_items:
+         - package1
+         - package2
